@@ -9,7 +9,7 @@ package buildcraft.api.power;
 
 import buildcraft.api.core.SafeTimeTracker;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * The PowerHandler is similar to FluidTank in that it holds your power and
@@ -339,7 +339,7 @@ public final class PowerHandler {
 	public void writeToNBT(NBTTagCompound data, String tag) {
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setFloat("storedEnergy", energyStored);
-		data.setCompoundTag(tag, nbt);
+		//data.setCompoundTag(tag, nbt);
 	}
 
 	public final class PowerReceiver {

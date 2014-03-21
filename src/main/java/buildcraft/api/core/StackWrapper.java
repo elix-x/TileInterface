@@ -25,7 +25,7 @@ public class StackWrapper {
 	@Override
 	public int hashCode() {
 		int hash = 5;
-		hash = 67 * hash + stack.itemID;
+		hash = 67 * hash + stack.hashCode();
 		hash = 67 * hash + stack.getItemDamage();
 		if (stack.stackTagCompound != null)
 			hash = 67 * hash + stack.stackTagCompound.hashCode();
@@ -39,7 +39,7 @@ public class StackWrapper {
 		if (getClass() != obj.getClass())
 			return false;
 		final StackWrapper other = (StackWrapper) obj;
-		if (stack.itemID != other.stack.itemID)
+		if (stack != other.stack)
 			return false;
 		if (stack.getHasSubtypes() && stack.getItemDamage() != other.stack.getItemDamage())
 			return false;

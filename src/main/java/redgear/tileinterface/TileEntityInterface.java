@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -27,8 +27,7 @@ public class TileEntityInterface extends TileEntity implements ISidedInventory, 
 	protected TileEntity getTile() {
 		ForgeDirection temp = getDirection();
 
-		TileEntity tile = worldObj.getBlockTileEntity(xCoord + temp.offsetX, yCoord + temp.offsetY, zCoord
-				+ temp.offsetZ);
+		TileEntity tile = worldObj.getTileEntity(xCoord + temp.offsetX, yCoord + temp.offsetY, zCoord + temp.offsetZ);
 
 		if (tile instanceof TileEntityInterface) {
 			TileEntityInterface other = (TileEntityInterface) tile;
@@ -48,11 +47,10 @@ public class TileEntityInterface extends TileEntity implements ISidedInventory, 
 		if (tile instanceof IInventory)
 			if (tile instanceof TileEntityChest) {
 				ForgeDirection temp = getDirection();
-				int l = worldObj.getBlockId(xCoord + temp.offsetX, yCoord + temp.offsetY, zCoord + temp.offsetZ);
-				Block block = Block.blocksList[l];
+				Block block = worldObj.getBlock(xCoord + temp.offsetX, yCoord + temp.offsetY, zCoord + temp.offsetZ);
 
-				if (block instanceof BlockChest)
-					return ((BlockChest) block).getInventory(worldObj, xCoord + temp.offsetX, yCoord + temp.offsetY,
+				if (block instanceof BlockChest)//getInventory
+					return ((BlockChest) block).func_149951_m(worldObj, xCoord + temp.offsetX, yCoord + temp.offsetY,
 							zCoord + temp.offsetZ);
 			} else
 				return (IInventory) tile;
@@ -108,21 +106,21 @@ public class TileEntityInterface extends TileEntity implements ISidedInventory, 
 	}
 
 	@Override
-	public String getInvName() {
+	public String getInventoryName() {
 		IInventory tile = getInv();
 
 		if (tile instanceof IInventory)
-			return tile.getInvName();
+			return tile.getInventoryName();
 		else
 			return "";
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
+	public boolean hasCustomInventoryName() {
 		IInventory tile = getInv();
 
 		if (tile instanceof IInventory)
-			return tile.isInvNameLocalized();
+			return tile.hasCustomInventoryName();
 		else
 			return true;
 	}
@@ -148,19 +146,19 @@ public class TileEntityInterface extends TileEntity implements ISidedInventory, 
 	}
 
 	@Override
-	public void openChest() {
+	public void openInventory() {
 		IInventory tile = getInv();
 
 		if (tile instanceof IInventory)
-			tile.openChest();
+			tile.openInventory();
 	}
 
 	@Override
-	public void closeChest() {
+	public void closeInventory() {
 		IInventory tile = getInv();
 
 		if (tile instanceof IInventory)
-			tile.closeChest();
+			tile.closeInventory();
 	}
 
 	@Override

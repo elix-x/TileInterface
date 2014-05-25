@@ -8,17 +8,16 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import buildcraft.api.power.IPowerReceptor;
-import buildcraft.api.power.PowerHandler;
-import buildcraft.api.power.PowerHandler.PowerReceiver;
 
-public class TileEntityInterface extends TileEntity implements ISidedInventory, IFluidHandler, IPowerReceptor {
+public class TileEntityInterface extends TileEntity implements ISidedInventory, IFluidHandler/*
+																							 * ,
+																							 * IPowerReceptor
+																							 */{
 
 	protected ForgeDirection getDirection() {
 		return ForgeDirection.getOrientation(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
@@ -260,34 +259,34 @@ public class TileEntityInterface extends TileEntity implements ISidedInventory, 
 		else
 			return null;
 	}
-
-	@Override
-	public PowerReceiver getPowerReceiver(ForgeDirection side) {
-		TileEntity tile = getTile();
-
-		if (tile instanceof IPowerReceptor)
-			return ((IPowerReceptor) tile).getPowerReceiver(side);
-		else
-			return null;
-	}
-
-	@Override
-	public void doWork(PowerHandler workProvider) {
-		TileEntity tile = getTile();
-
-		if (tile instanceof IPowerReceptor)
-			((IPowerReceptor) tile).doWork(workProvider);
-
-	}
-
-	@Override
-	public World getWorld() {
-		TileEntity tile = getTile();
-
-		if (tile instanceof IPowerReceptor)
-			return ((IPowerReceptor) tile).getWorld();
-		else
-			return null;
-	}
-
+	/*
+	 * @Override
+	 * public PowerReceiver getPowerReceiver(ForgeDirection side) {
+	 * TileEntity tile = getTile();
+	 * 
+	 * if (tile instanceof IPowerReceptor)
+	 * return ((IPowerReceptor) tile).getPowerReceiver(side);
+	 * else
+	 * return null;
+	 * }
+	 * 
+	 * @Override
+	 * public void doWork(PowerHandler workProvider) {
+	 * TileEntity tile = getTile();
+	 * 
+	 * if (tile instanceof IPowerReceptor)
+	 * ((IPowerReceptor) tile).doWork(workProvider);
+	 * 
+	 * }
+	 * 
+	 * @Override
+	 * public World getWorld() {
+	 * TileEntity tile = getTile();
+	 * 
+	 * if (tile instanceof IPowerReceptor)
+	 * return ((IPowerReceptor) tile).getWorld();
+	 * else
+	 * return null;
+	 * }
+	 */
 }
